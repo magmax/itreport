@@ -5,7 +5,7 @@ import logging
 
 from .dump import JiraDump
 
-logger = logging.getLogger(__name__)
+logger = logging.getLogger("jiradump." + __name__)
 
 
 def configure_logging(verbosity):
@@ -15,16 +15,18 @@ def configure_logging(verbosity):
     formatter = logging.Formatter(msg_format)
     handler = logging.StreamHandler()
     handler.setFormatter(formatter)
-    logger.addHandler(handler)
-    logger.setLevel(level)
+    root_logger = logging.getLogger("jiradump")
+    root_logger.addHandler(handler)
+    root_logger.setLevel(level)
 
 
 def valid_date(s):
     valid_formats = ["%Y-%m-%d", "%Y/%m/%d", "%Y%m%d"]
     for fmt in valid_formats:
         try:
-            return datetime.strptime(s, fmt)
+            return datetime.datetime.strptime(s, fmt)
         except ValueError:
+            logger.debug(f"Date {s} does not match format {fmt}")
             pass
     msg = "Not a valid date: '{0}'. Valid formats: {1}".format(s, ",".join(valid_formats))
     raise argparse.ArgumentTypeError(msg)
@@ -39,8 +41,16 @@ def parse_args():
     parser.add_argument(
         "-f",
         "--from-date",
-        type=datetime.datetime,
-        help="Date from to get data (format: YYYY/MM/DD)",
+        type=valid_date,
+        default=datetime.datetime.today(),
+        help="Initial date to get data",
+    )
+    parser.add_argument(
+        "-t",
+        "--to-date",
+        type=valid_date,
+        default=datetime.datetime.today(),
+        help="Final date to get data",
     )
     return parser.parse_args()
 
@@ -48,15 +58,13 @@ def parse_args():
 def main():
     args = parse_args()
     configure_logging(args.verbose)
+    logger.info("Showing INFO messages")
+    logger.debug("Showing DEBUG messages")
 
     server = args.server or input("Server: ")
+    logger.debug(f"Connecting to {server}")
     jiradump = JiraDump(server)
-    jiradump.dump(
-        jiradump.retrieve(
-            datetime.datetime(2019, 12, 13), datetime.datetime(2019, 12, 20)
-        ),
-        "output",
-    )
+    jiradump.dump(jiradump.retrieve(args.from_date, args.to_date), "output")
 
 
 if __name__ == "__main__":
