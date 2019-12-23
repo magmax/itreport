@@ -29,9 +29,6 @@ def parse_args():
         "-v", "--verbose", action="count", default=0, help="Increase verbosity"
     )
     parser.add_argument(
-        "-c", "--config-file", default='~/.jira/config.ini', help='Server to connect to'
-    )
-    parser.add_argument(
         "-s", "--server", help='Server to connect to'
     )
     return parser.parse_args()
@@ -41,9 +38,7 @@ def main():
     args = parse_args()
     configure_logging(args.verbose)
 
-    config = configparser.ConfigParser()
-    config.read(os.path.expanduser(args.config_file))
-    server = args.server or config['DEFAULT'].get('server') or input('Server: ')
+    server = args.server or input('Server: ')
     jiradump = JiraDump(server)
     jiradump.dump(
         jiradump.retrieve(
