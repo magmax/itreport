@@ -1,7 +1,5 @@
 import logging
-import os
 
-import yaml
 from jira import JIRA
 
 logger = logging.getLogger("jiradump." + __name__)
@@ -37,29 +35,21 @@ class IssueIterator:
         return result
 
 
-class JiraDump:
+class JiraRetriever:
     def __init__(self, server):
         self.jira = JIRA(server=server)
 
-    def retrieve(self, date_from, date_to):
+    def retrieve_issues(self, date_from, date_to, projects=None):
         str_from = date_from.strftime("%Y-%m-%d")
         str_to = date_to.strftime("%Y-%m-%d")
 
         def _internal(start_at):
             logger.info(f"Retrieving more issues starting at {start_at}")
-            return self.jira.search_issues(
-                "project = DVOP AND ("
-                "  status != Closed OR"
-                f" (updated >= {str_from} AND updated <= {str_to}))",
-                startAt=start_at,
-            )
+            jql = f"(status != Closed OR (updated >= {str_from} AND updated <= {str_to}))"
+            if projects:
+                str_prj = ",".join(projects or [])
+                jql += f" AND project in ({str_prj})"
+
+            return self.jira.search_issues(jql, startAt=start_at)
 
         return IssueIterator(_internal, self.jira.issue)
-
-    def dump(self, issues, output):
-        if not os.path.exists(output):
-            logger.debug(f"Creating directory {output}")
-            os.makedirs(output)
-        for issue in issues:
-            with open(os.path.join(output, f"{issue.key}.yaml"), "w+") as fd:
-                yaml.dump(issue.raw, fd, default_flow_style=False)

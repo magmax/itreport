@@ -15,5 +15,4 @@ repos:
     rev: v1.3.0
     hooks:
     - id: name-tests-test
-      exclude: "utils.py"
     - id: flake8

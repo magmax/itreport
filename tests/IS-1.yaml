@@ -1,0 +1,175 @@
+expand: renderedFields,names,schema,operations,editmeta,changelog,versionedRepresentations
+fields:
+  aggregateprogress:
+    percent: 100
+    progress: 1800
+    total: 1800
+  aggregatetimeestimate: 0
+  aggregatetimeoriginalestimate: null
+  aggregatetimespent: 1800
+  assignee:
+    accountId: 123456:11111111-1111-1111-1111-111111111111
+    accountType: atlassian
+    active: true
+    displayName: Fubar
+    emailAddress: fubar@example.com
+    key: fubar
+    name: fubar
+    self: https://example.atlassian.net/rest/api/2/user?accountId=123456%3A11111111-1111-1111-1111-111111111111
+    timeZone: Europe/Paris
+  attachment: []
+  description: This is a description
+  duedate: '2019-12-19'
+  environment: null
+  fixVersions: []
+  issuelinks:
+  - id: '2001'
+    outwardIssue:
+      fields:
+        issuetype:
+          avatarId: 10618
+          description: A small, distinct piece of work.
+          iconUrl: https://example.atlassian.net/secure/viewavatar?size=medium&avatarId=10618&avatarType=issuetype
+          id: '3'
+          name: Task
+          self: https://example.atlassian.net/rest/api/2/issuetype/3
+          subtask: false
+        priority:
+          iconUrl: https://example.atlassian.net/images/icons/priorities/minor.svg
+          id: '4'
+          name: Minor (P4)
+          self: https://example.atlassian.net/rest/api/2/priority/4
+        status:
+          description: The issue is open and ready for the assignee to start work
+            on it.
+          iconUrl: https://example.atlassian.net/images/icons/statuses/open.png
+          id: '1'
+          name: Open
+          self: https://example.atlassian.net/rest/api/2/status/1
+          statusCategory:
+            colorName: blue-gray
+            id: 2
+            key: new
+            name: To Do
+            self: https://example.atlassian.net/rest/api/2/statuscategory/2
+        summary: "Issue 2 summary"
+      id: '1002'
+      key: IS-2
+      self: https://example.atlassian.net/rest/api/2/issue/1002
+    self: https://example.atlassian.net/rest/api/2/issueLink/2001
+    type:
+      id: '10003'
+      inward: relates to
+      name: Relates
+      outward: relates to
+      self: https://example.atlassian.net/rest/api/2/issueLinkType/10003
+  issuetype:
+    avatarId: 3000
+    description: Whatever does whatever
+    iconUrl: https://example.atlassian.net/secure/viewavatar?size=medium&avatarId=17000&avatarType=issuetype
+    id: '4000'
+    name: Whatever
+    self: https://example.atlassian.net/rest/api/2/issuetype/4000
+    subtask: false
+  labels: []
+  lastViewed: 2019-12-22T00:00:00.000+0100
+  priority:
+    iconUrl: https://example.atlassian.net/images/icons/priorities/minor.svg
+    id: '4'
+    name: Minor (P4)
+    self: https://example.atlassian.net/rest/api/2/priority/4
+  progress:
+    percent: 100
+    progress: 1800
+    total: 1800
+  project:
+    id: '100'
+    key: PHX
+    name: Phoenix
+    projectTypeKey: software
+    self: https://example.atlassian.net/rest/api/2/project/100
+    simplified: false
+  reporter:
+    accountId: 222222:22222222-2222-2222-2222-222222222222
+    accountType: atlassian
+    active: true
+    displayName: John Smith
+    key: jsmith
+    name: jsmith
+    self: https://example.atlassian.net/rest/api/2/user?accountId=222222%3A22222222-2222-2222-2222-222222222222
+    timeZone: Europe/Madrid
+  resolution: null
+  resolutiondate: null
+  security: null
+  status:
+    description: The issue is considered finished, the resolution is correct. Issues
+      which are closed can be reopened.
+    iconUrl: https://example.atlassian.net/images/icons/statuses/closed.png
+    id: '6'
+    name: Closed
+    self: https://example.atlassian.net/rest/api/2/status/6
+    statusCategory:
+      colorName: green
+      id: 3
+      key: done
+      name: Done
+      self: https://example.atlassian.net/rest/api/2/statuscategory/3
+  statuscategorychangedate: 2019-12-19T00:00:00.000+0100
+  subtasks: []
+  summary: "Do some stuff"
+  timeestimate: 0
+  timeoriginalestimate: null
+  timespent: 1800
+  timetracking:
+    remainingEstimate: 0m
+    remainingEstimateSeconds: 0
+    timeSpent: 30m
+    timeSpentSeconds: 1800
+  updated: 2019-12-19T00:00:00.000+0100
+  versions: []
+  votes:
+    hasVoted: false
+    self: https://example.atlassian.net/rest/api/2/issue/IS-1/votes
+    votes: 0
+  watches:
+    isWatching: false
+    self: https://example.atlassian.net/rest/api/2/issue/IS-1/watchers
+    watchCount: 2
+  worklog:
+    maxResults: 20
+    startAt: 0
+    total: 1
+    worklogs:
+    - author:
+        accountId: 123456:11111111-1111-1111-1111-111111111111
+        accountType: atlassian
+        active: true
+        displayName: Fubar
+        emailAddress: fubar@example.com
+        key: fubar
+        name: fubar
+        self: https://example.atlassian.net/rest/api/2/user?accountId=123456%3A11111111-1111-1111-1111-111111111111
+        timeZone: Europe/Paris
+      comment: A comment for the worklog
+      created: 2019-12-19T00:00:00.000+0100
+      id: '5000'
+      issueId: '1001'
+      self: https://example.atlassian.net/rest/api/2/issue/1001/worklog/5000
+      started: 2019-12-19T00:00:00.000+0100
+      timeSpent: 30m
+      timeSpentSeconds: 1800
+      updateAuthor:
+        accountId: 123456:11111111-1111-1111-1111-111111111111
+        accountType: atlassian
+        active: true
+        displayName: Fubar
+        emailAddress: fubar@example.com
+        key: fubar
+        name: fubar
+        self: https://example.atlassian.net/rest/api/2/user?accountId=123456%3A11111111-1111-1111-1111-111111111111
+        timeZone: Europe/Paris
+      updated: 2019-12-19T00:00:00.000+0100
+  workratio: -1
+id: '1001'
+key: IS-1
+self: https://example.atlassian.net/rest/api/2/issue/1001

@@ -3,7 +3,8 @@ import argparse
 import datetime
 import logging
 
-from .dump import JiraDump
+from .retriever import JiraRetriever
+from .writer import Writer
 
 logger = logging.getLogger("jiradump." + __name__)
 
@@ -39,6 +40,9 @@ def parse_args():
     )
     parser.add_argument("-s", "--server", help="Server to connect to")
     parser.add_argument(
+        "-p", "--project", nargs="*", help="projects to be retrieved. All if empty"
+    )
+    parser.add_argument(
         "-f",
         "--from-date",
         type=valid_date,
@@ -52,6 +56,7 @@ def parse_args():
         default=datetime.datetime.today(),
         help="Final date to get data",
     )
+    parser.add_argument("-o", "--output", default="output", help="Output directory")
     return parser.parse_args()
 
 
@@ -63,8 +68,10 @@ def main():
 
     server = args.server or input("Server: ")
     logger.debug(f"Connecting to {server}")
-    jiradump = JiraDump(server)
-    jiradump.dump(jiradump.retrieve(args.from_date, args.to_date), "output")
+    retriever = JiraRetriever(server)
+    issues = retriever.retrieve_issues(args.from_date, args.to_date, args.project)
+    writer = Writer(args.output)
+    writer.write(issues)
 
 
 if __name__ == "__main__":
