@@ -2,11 +2,12 @@
 import argparse
 import datetime
 import logging
+import os
 
 from .retriever import JiraRetriever
 from .writer import Writer
 
-logger = logging.getLogger("jiradump." + __name__)
+logger = logging.getLogger(__name__)
 
 
 def configure_logging(verbosity):
@@ -16,7 +17,7 @@ def configure_logging(verbosity):
     formatter = logging.Formatter(msg_format)
     handler = logging.StreamHandler()
     handler.setFormatter(formatter)
-    root_logger = logging.getLogger("jiradump")
+    root_logger = logging.getLogger("jirareport")
     root_logger.addHandler(handler)
     root_logger.setLevel(level)
 
@@ -34,7 +35,7 @@ def valid_date(s):
 
 
 def parse_args():
-    parser = argparse.ArgumentParser(description="Monitor for HTTP traffic")
+    parser = argparse.ArgumentParser(description="Dump Jira resources into YAML files")
     parser.add_argument(
         "-v", "--verbose", action="count", default=0, help="Increase verbosity"
     )
@@ -56,7 +57,7 @@ def parse_args():
         default=datetime.datetime.today(),
         help="Final date to get data",
     )
-    parser.add_argument("-o", "--output", default="output", help="Output directory")
+    parser.add_argument("-o", "--output", default="build/dump", help="Output directory")
     return parser.parse_args()
 
 
@@ -65,6 +66,10 @@ def main():
     configure_logging(args.verbose)
     logger.info("Showing INFO messages")
     logger.debug("Showing DEBUG messages")
+
+    if not os.path.exists(args.output):
+        logger.debug(f"Creating directory {args.output}")
+        os.makedirs(args.output)
 
     server = args.server or input("Server: ")
     logger.debug(f"Connecting to {server}")
