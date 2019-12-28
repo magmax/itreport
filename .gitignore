@@ -1,5 +1,8 @@
 venv/
 output/
+__pycache__/
+*.egg-info/
+build/
+dist/
 *.swp
 *.pyc
-__pycache__/

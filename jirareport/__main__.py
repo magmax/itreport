@@ -68,10 +68,10 @@ def main():
 
     server = args.server or input("Server: ")
     logger.debug(f"Connecting to {server}")
+    writer = Writer(args.output)
     retriever = JiraRetriever(server)
     issues = retriever.retrieve_issues(args.from_date, args.to_date, args.project)
-    writer = Writer(args.output)
-    writer.write(issues)
+    writer.write(issues, lambda x: x.raw, lambda x: f"issue-{x.key}.yaml")
 
 
 if __name__ == "__main__":

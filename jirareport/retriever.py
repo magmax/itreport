@@ -2,7 +2,7 @@ import logging
 
 from jira import JIRA
 
-logger = logging.getLogger("jiradump." + __name__)
+logger = logging.getLogger(__name__)
 
 
 class IssueIterator:
