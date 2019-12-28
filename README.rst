@@ -1,7 +1,7 @@
 Quick SetUp
 ===========
 
-Jiradump uses python-jira, so it can use the `.netrc` file too.
+Jirareport uses python-jira, so it can use the `.netrc` file too.
 
 The easiest setup is:
 
@@ -14,16 +14,29 @@ The easiest setup is:
          login <your username>
          password <the jira token>
 
-example::
+   example::
 
-   machine example.atlassian.net
-     login fubar@example.org
-     password ASDFHUdflasfj867ua
+       machine example.atlassian.net
+         login fubar@example.org
+         password ASDFHUdflasfj867ua
 
-After this easy initialization, just download the repository and run::
+3. Install jirareport::
 
-    python -m jiradump -s example.atlassian.net
+    pip install jirareport
 
-And it will dump the issues that were modified in the selected period or are
-currently open. The default period is "today", but you can change it with the
-options `-f` and `-t`.
+
+This install some scripts:
+
+jiradump
+--------
+
+Dumps jira issues, authors and more into yaml files.
+
+Example:
+
+    python -m jiradump --server example.atlassian.net --project EX
+
+This is the only script that works with Jira directly. The others will work with
+`jiradump` results.
+
+

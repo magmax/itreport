@@ -61,4 +61,5 @@ setup(
     include_package_data=True,
     zip_safe=False,
     install_requires=["jira == 2.0.0", "pyyaml == 5.2"],
+    entry_points={"console_scripts": ["jiradump = jirareport.dump:main"]},
 )
