@@ -77,6 +77,7 @@ def main():
     retriever = JiraRetriever(server)
     issues = retriever.retrieve_issues(args.from_date, args.to_date, args.project)
     writer.write(issues, lambda x: x.raw, lambda x: f"issue-{x.key}.yaml")
+    writer.write(retriever.users(), lambda x: x.raw, lambda x: f"user-{x.key}.yaml")
 
 
 if __name__ == "__main__":

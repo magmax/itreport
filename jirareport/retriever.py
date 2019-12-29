@@ -38,6 +38,7 @@ class IssueIterator:
 class JiraRetriever:
     def __init__(self, server):
         self.jira = JIRA(server=server)
+        self._users = set()
 
     def retrieve_issues(self, date_from, date_to, projects=None):
         str_from = date_from.strftime("%Y-%m-%d")
@@ -50,6 +51,21 @@ class JiraRetriever:
                 str_prj = ",".join(projects or [])
                 jql += f" AND project in ({str_prj})"
 
-            return self.jira.search_issues(jql, startAt=start_at)
+            result = self.jira.search_issues(jql, startAt=start_at)
+            self._extract_users_from_issues(result)
+            return result
 
         return IssueIterator(_internal, self.jira.issue)
+
+    def _extract_users_from_issues(self, issues):
+        for issue in issues:
+            fields = issue.raw["fields"]
+            self._users.add((fields.get("assignee") or {}).get("key", None))
+            self._users.add((fields.get("creator") or {}).get("key", None))
+
+    def users(self):
+        for user in self._users:
+            if user is None:
+                continue
+            logger.info(f"Processing user {user}")
+            yield self.jira.user(user, expand=["groups", "applicationRoles"])
