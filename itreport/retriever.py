@@ -69,3 +69,8 @@ class JiraRetriever:
                 continue
             logger.info(f"Processing user {user}")
             yield self.jira.user(user, expand=["groups", "applicationRoles"])
+
+    def fields(self):
+        for f in self.jira.fields():
+            logger.info(f"Processing custom field {f.get('key')}")
+            yield f

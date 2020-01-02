@@ -3,7 +3,7 @@ import argparse
 import logging
 import os
 
-from jirareport.reader import IssueWalker
+from jirareport.reader import IssueWalker, UserWalker
 from jirareport.reporter import Reporter
 
 logger = logging.getLogger(__name__)
@@ -45,7 +45,7 @@ def main():
         os.makedirs(args.output)
 
     reporter = Reporter(args.output)
-    values = dict(issues=IssueWalker(args.dump))
+    values = dict(issues=IssueWalker(args.dump), users=UserWalker(args.dump))
     for template in args.template:
         reporter.apply(template, values)
 

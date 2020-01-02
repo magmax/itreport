@@ -5,7 +5,7 @@ import sys
 from setuptools import find_packages, setup
 from setuptools.command.test import test as TestCommand
 
-from jirareport import __version__
+from itreport import __version__
 
 
 def read_description():
@@ -38,7 +38,7 @@ class PyTest(TestCommand):
 
 
 setup(
-    name="jirareport",
+    name="itreport",
     version=__version__,
     description=("Commands to allow command line jira reports."),
     long_description=read_description(),
@@ -63,8 +63,8 @@ setup(
     install_requires=["jira == 2.0.0", "pyyaml == 5.2", "jinja2 == 2.10.3"],
     entry_points={
         "console_scripts": [
-            "jiradump = jirareport.dump:main",
-            "jirareport = jirareport.report:main",
+            "jiradump = itreport.jiradump:main",
+            "itreport = itreport.report:main",
         ]
     },
 )

@@ -78,6 +78,7 @@ def main():
     issues = retriever.retrieve_issues(args.from_date, args.to_date, args.project)
     writer.write(issues, lambda x: x.raw, lambda x: f"issue-{x.key}.yaml")
     writer.write(retriever.users(), lambda x: x.raw, lambda x: f"user-{x.key}.yaml")
+    writer.write(retriever.fields(), lambda x: x, lambda x: f"field-{x.get('key')}.yaml")
 
 
 if __name__ == "__main__":

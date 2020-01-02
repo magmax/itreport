@@ -6,7 +6,7 @@ import yaml
 logger = logging.getLogger(__name__)
 
 
-class IssuePromise:
+class Promise:
     def __init__(self, path):
         self.filename = path
         self.data = None
@@ -19,23 +19,33 @@ class IssuePromise:
         return self.data.get(attr)
 
 
-class IssueIterator:
+class Iterator:
     def __init__(self, files):
         self.files = list(files)
 
     def __next__(self):
         if not self.files:
             raise StopIteration()
-        return IssuePromise(self.files.pop(0))
+        return Promise(self.files.pop(0))
 
 
-class IssueWalker:
+class Walker:
+    prefix = None
+
     def __init__(self, directory):
         self.directory = directory
 
     def __iter__(self):
-        return IssueIterator(
+        return Iterator(
             os.path.join(self.directory, x)
             for x in os.listdir(self.directory)
-            if x.startswith("issue-")
+            if x.startswith(self.prefix)
         )
+
+
+class IssueWalker(Walker):
+    prefix = "issue-"
+
+
+class UserWalker(Walker):
+    prefix = "user-"

@@ -23,6 +23,9 @@ class Reporter:
 
     def apply(self, template_name, values):
         output_file = os.path.join(self.output, template_name)
+        output_dir = os.path.dirname(output_file)
+        if not os.path.exists(output_dir):
+            os.makedirs(output_dir)
         logger.info(f"Applying template {template_name} and saving as {output_file}")
         template = self.env.get_template(template_name)
         with open(output_file, "w+") as fd:
