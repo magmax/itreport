@@ -1,7 +1,7 @@
 Quick SetUp
 ===========
 
-Jirareport uses python-jira, so it can use the `.netrc` file too.
+ITReport uses python-jira, so it can use the `.netrc` file too.
 
 The easiest setup is:
 
@@ -20,12 +20,12 @@ The easiest setup is:
          login fubar@example.org
          password ASDFHUdflasfj867ua
 
-3. Install jirareport::
+3. Install itreport::
 
-    pip install jirareport
+    pip install itreport
 
 
-This install some scripts:
+This installs some scripts:
 
 jiradump
 --------
@@ -34,9 +34,14 @@ Dumps jira issues, authors and more into yaml files.
 
 Example:
 
-    python -m jiradump --server example.atlassian.net --project EX
+    itr-jiradump --server example.atlassian.net --project EX
 
-This is the only script that works with Jira directly. The others will work with
-`jiradump` results.
+itreport
+--------
 
+Applies some templates in order to generate a final report.
+
+Example:
+
+    itreport -t issue.rst -vvv
 

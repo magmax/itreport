@@ -12,10 +12,10 @@ class Reporter:
             [
                 jinja2.FileSystemLoader("./templates"),
                 jinja2.FileSystemLoader(
-                    os.path.join(os.path.expanduser("~"), ".jirareport", "templates")
+                    os.path.join(os.path.expanduser("~"), ".itreport", "templates")
                 ),
-                jinja2.FileSystemLoader("/etc/jirareport/templates"),
-                jinja2.PackageLoader("jirareport", "templates"),
+                jinja2.FileSystemLoader("/etc/itreport/templates"),
+                jinja2.PackageLoader("itreport", "templates"),
             ]
         )
         self.env = jinja2.Environment(loader=loader)

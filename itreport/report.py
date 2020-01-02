@@ -3,8 +3,8 @@ import argparse
 import logging
 import os
 
-from jirareport.reader import IssueWalker, UserWalker
-from jirareport.reporter import Reporter
+from .reader import IssueWalker, UserWalker
+from .reporter import Reporter
 
 logger = logging.getLogger(__name__)
 
@@ -16,7 +16,7 @@ def configure_logging(verbosity):
     formatter = logging.Formatter(msg_format)
     handler = logging.StreamHandler()
     handler.setFormatter(formatter)
-    root_logger = logging.getLogger("jirareport")
+    root_logger = logging.getLogger("itreport")
     root_logger.addHandler(handler)
     root_logger.setLevel(level)
 

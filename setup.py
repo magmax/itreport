@@ -40,7 +40,7 @@ class PyTest(TestCommand):
 setup(
     name="itreport",
     version=__version__,
-    description=("Commands to allow command line jira reports."),
+    description=("Data gatherer and final data report generator."),
     long_description=read_description(),
     cmdclass={"test": PyTest},
     classifiers=[
@@ -52,10 +52,10 @@ setup(
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
     ],
-    keywords="jira atlassian report",
+    keywords="jira atlassian it report",
     author="Miguel Ángel García",
     author_email="miguelangel.garcia@gmail.com",
-    url="https://github.com/magmax/jirareport",
+    url="https://github.com/magmax/itreport",
     license="MIT",
     packages=find_packages(exclude=["tests"]),
     include_package_data=True,
@@ -63,7 +63,7 @@ setup(
     install_requires=["jira == 2.0.0", "pyyaml == 5.2", "jinja2 == 2.10.3"],
     entry_points={
         "console_scripts": [
-            "jiradump = itreport.jiradump:main",
+            "itr-jiradump = itreport.jiradump:main",
             "itreport = itreport.report:main",
         ]
     },

@@ -17,7 +17,7 @@ def configure_logging(verbosity):
     formatter = logging.Formatter(msg_format)
     handler = logging.StreamHandler()
     handler.setFormatter(formatter)
-    root_logger = logging.getLogger("jirareport")
+    root_logger = logging.getLogger("itreport")
     root_logger.addHandler(handler)
     root_logger.setLevel(level)
 
