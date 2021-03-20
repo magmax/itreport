@@ -60,7 +60,7 @@ setup(
     packages=find_packages(exclude=["tests"]),
     include_package_data=True,
     zip_safe=False,
-    install_requires=["jira == 2.0.0", "pyyaml == 5.2", "jinja2 == 2.10.3"],
+    install_requires=["jira == 2.0.0", "pyyaml == 5.2", "jinja2 == 2.11.3"],
     entry_points={
         "console_scripts": [
             "itr-jiradump = itreport.jiradump:main",
